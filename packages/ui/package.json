@@ -5,7 +5,8 @@
   "types": "./src/index.ts",
   "private": true,
   "scripts": {
-    "lint": "eslint src/**/*.ts*"
+    "lint": "eslint src/**/*.ts*",
+    "clean": "rimraf dist build .turbo"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

@@ -12,13 +12,20 @@ import {
   Activity, 
   Database, 
   ShieldCheck,
-  LogOut
+  LogOut,
+  BookOpen,
+  Video
 } from "lucide-react";
 
 const adminLinks = [
   { href: "/admin/assignments", label: "Assignments", icon: UserPlus },
   { href: "/admin/monitoring", label: "Monitoring", icon: Activity },
   { href: "/admin/food-db", label: "Food DB", icon: Database },
+];
+
+const contentLinks = [
+  { href: "/content/blogs", label: "Blog Posts", icon: BookOpen },
+  { href: "/content/videos", label: "Exercise Videos", icon: Video },
 ];
 
 const superAdminLinks = [
@@ -60,6 +67,17 @@ export function Sidebar() {
           </h2>
           <div className="space-y-1">
             {adminLinks.map((link) => (
+              <NavLink key={link.href} {...link} />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Content Management
+          </h2>
+          <div className="space-y-1">
+            {contentLinks.map((link) => (
               <NavLink key={link.href} {...link} />
             ))}
           </div>

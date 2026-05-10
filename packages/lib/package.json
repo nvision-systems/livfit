@@ -18,5 +18,8 @@
   "peerDependencies": {
     "@supabase/ssr": "^0.10.3",
     "next": "^16.2.6"
+  },
+  "scripts": {
+    "clean": "rimraf dist build .turbo"
   }
 }

@@ -1,10 +1,11 @@
 {
-  "name": "@livfit/admin",
+  "name": "@livfit/staff",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev -p 7001",
     "build": "cross-env NODE_ENV=production next build",
-    "lint": "cross-env NODE_ENV=production next lint"
+    "lint": "cross-env NODE_ENV=production next lint",
+    "clean": "rimraf .next .turbo"
   },
   "dependencies": {
     "@livfit/lib": "workspace:^",
@@ -16,6 +17,7 @@
     "next": "^16.2.6",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "react-quill-new": "^3.8.3",
     "tailwind-merge": "^3.5.0"
   }
 }

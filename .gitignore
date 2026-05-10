@@ -29,6 +29,8 @@ node_modules/
 .pnp
 .pnp.js
 .pnpm-store/
+package-lock.json
+yarn.lock
 
 # Build outputs
 dist/
@@ -107,3 +109,4 @@ storybook-static/
 # Temporary files
 tmp/
 temp/
+/.vscode

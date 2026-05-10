@@ -6,11 +6,11 @@ import { Sidebar } from "../components/Sidebar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "LivFit Admin Console",
-  description: "Healthcare monitoring and management platform",
+  title: "LivFit Staff Hub",
+  description: "Unified healthcare monitoring and management platform",
 };
 
-export default function AdminLayout({
+export default function StaffLayout({
   children,
 }: {
   children: React.ReactNode;

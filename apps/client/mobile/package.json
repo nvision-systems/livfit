@@ -4,7 +4,8 @@
   "main": "expo-router/entry",
   "scripts": {
     "dev": "cross-env NODE_ENV=development expo start --port 8081",
-    "start": "cross-env NODE_ENV=production expo start"
+    "start": "cross-env NODE_ENV=production expo start",
+    "clean": "rimraf .expo .turbo"
   },
   "dependencies": {
     "@expo/metro-runtime": "^55.0.11",

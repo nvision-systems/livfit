@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development turbo dev",
     "build": "cross-env NODE_ENV=production turbo build",
-    "lint": "turbo lint"
+    "lint": "cross-env NODE_ENV=production turbo lint",
+    "clean": "node -e \"require('child_process').exec(process.platform==='win32'?'taskkill /F /IM node.exe /T':'pkill -f node')\" & turbo run clean",
+    "kill": "node -e \"require('child_process').exec(process.platform==='win32'?'taskkill /F /IM node.exe /T':'pkill -f node')\""
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.0",
@@ -15,6 +17,7 @@
     "autoprefixer": "^10.5.0",
     "cross-env": "^10.1.0",
     "postcss": "^8.5.14",
+    "rimraf": "^6.1.3",
     "tailwindcss": "^4.3.0",
     "turbo": "^1.13.0",
     "typescript": "6.0.3"
