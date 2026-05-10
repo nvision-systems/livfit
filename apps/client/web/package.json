@@ -1,0 +1,24 @@
+{
+  "name": "@livfit/web",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development next dev -p 7000",
+    "build": "cross-env NODE_ENV=production next build",
+    "lint": "cross-env NODE_ENV=production next lint"
+  },
+  "dependencies": {
+    "@livfit/lib": "workspace:^",
+    "@livfit/ui": "workspace:^",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.105.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.14.0",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}

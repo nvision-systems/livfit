@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+dist/
+build/
+out/
+
+# Expo / React Native generated folders
+android/
+ios/
+web-build/
+.expo/
+.expo-shared/
+
+# Turbo
+.turbo
+.turbo-cache
+
+# Coverage
+coverage/
+
+# Generated typings
+.next-env.d.ts
+
+# Config files (optional)
+*.config.js

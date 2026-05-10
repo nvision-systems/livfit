@@ -1,0 +1,25 @@
+{
+  "name": "@livfit/mobile",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development expo start --port 8081",
+    "start": "cross-env NODE_ENV=production expo start"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "^55.0.11",
+    "@livfit/lib": "workspace:^",
+    "expo": "^55.0.23",
+    "expo-av": "^16.0.8",
+    "expo-router": "^55.0.14",
+    "lucide-react-native": "^1.14.0",
+    "react": "19.2.0",
+    "react-dom": "^19.2.6",
+    "react-native": "0.83.6",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "babel-preset-expo": "^55.0.21",
+    "expo-dev-client": "^55.0.32"
+  }
+}

@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+dist/
+build/
+out/
+web-build/
+
+# Turbo
+.turbo
+.turbo-cache
+
+# Expo / React Native
+.expo/
+.expo-shared/
+android/
+ios/
+
+# Coverage & reports
+coverage/
+playwright-report/
+
+# Generated files
+.next-env.d.ts
+
+# Environment files
+.env
+.env.*
+
+# Lockfiles (optional – recommended to keep formatting stable)
+pnpm-lock.yaml
