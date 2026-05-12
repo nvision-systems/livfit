@@ -21,6 +21,39 @@ export const mockDemoUsers = {
     specialty: 'Hepatology Nutrition',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarah'
   },
+  editor: {
+    id: 'editor-1',
+    name: 'Jane Miller',
+    email: 'jane@livfit.app',
+    role: 'HEALTH_EDUCATOR',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=jane'
+  },
+  hepatologist: {
+    id: 'hep-1',
+    name: 'Dr. Alice Wong',
+    email: 'alice@livercenter.org',
+    role: 'HEPATOLOGIST',
+    specialty: 'Liver Transplantation',
+    organization_name: 'Metropolitan Liver Center',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alice'
+  },
+  coordinator: {
+    id: 'coord-1',
+    name: 'Mark Stevens',
+    email: 'mark@transplant.net',
+    role: 'TRANSPLANT_COORDINATOR',
+    organization_name: 'United Transplant Network',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=mark'
+  },
+  doctor: {
+    id: 'doctor-1',
+    name: 'Dr. Gregory House',
+    email: 'house@princeton.edu',
+    role: 'DOCTOR',
+    organization_name: 'Princeton-Plainsboro Teaching Hospital',
+    specialty: 'Diagnostic Medicine',
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=house'
+  },
   patient: {
     id: 'patient-1',
     name: 'John Doe',
@@ -29,7 +62,8 @@ export const mockDemoUsers = {
     age: 30,
     diagnosis: 'Cirrhosis',
     meldScore: 12,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=john'
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=john',
+    isConnectedToDietician: false
   }
 };
 

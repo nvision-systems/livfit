@@ -32,6 +32,31 @@ The platform includes a custom-built, lightweight CMS for staff to distribute ed
 *   **`@livfit/ui`**: The central Design System. Shared React components (Buttons, Cards, etc.) using Tailwind CSS.
 *   **`@livfit/lib`**: Core business logic, database schemas (Supabase), and shared TypeScript types.
 *   **`@livfit/ai`**: (New) Centralized AI services, prompt templates, and provider integrations.
+*   **`@livfit/lib/proxy`**: Shared authentication logic and RBAC guards.
+
+---
+
+## 🔐 Unified Authentication Architecture
+
+The platform uses a standardized, modular authentication system shared across all entry points.
+
+### 1. The "Proxy" Convention
+Following Next.js 16+ best practices, we have migrated from legacy `middleware.ts` to the **Proxy** pattern. 
+*   **Logic Location**: `@livfit/lib/src/proxy/auth_logic.ts`
+*   **Usage**: Each app defines a `proxy.ts` file that imports the shared `validateClinicalSession` logic.
+
+### 2. Role-Based Access Control (RBAC)
+User access is strictly enforced using these categories:
+*   **Clinical Roles**: `HEPATOLOGIST`, `TRANSPLANT_COORDINATOR`, `DIETICIAN`, `DOCTOR`. (Access to `/dietician`)
+*   **Staff Roles**: `ADMIN`, `SUPERADMIN`, `HEALTH_EDUCATOR`. (Access to `/admin`, `/content`)
+*   **External Roles**: `RESEARCHER`, `INSURANCE`. (Access to `/external`)
+
+### 3. Shared UI Module
+The **`LoginForm`** is a unified component located in `@livfit/ui`. 
+*   It handles both **Patient** and **Staff** login variants.
+*   It is used by both `@livfit/web` and `@livfit/staff`, ensuring that security patches applied to the UI library instantly protect all portals.
+
+---
 
 ---
 
@@ -51,6 +76,16 @@ Start all applications simultaneously:
 ```bash
 pnpm dev
 ```
+
+#### Running the Mobile App
+You can run the mobile app using Expo. From the root:
+```bash
+pnpm dev --filter @livfit/mobile
+```
+This will start the Expo development server on port 8081. You can then:
+- Scan the QR code with **Expo Go** (Android/iOS).
+- Press **`w`** to run in the browser.
+- Press **`a`** for Android Emulator or **`i`** for iOS Simulator.
 
 ### 🧹 Maintenance Commands
 We have customized scripts to handle the common "zombie process" issues in Windows development:
@@ -123,10 +158,13 @@ As of today, this project is optimized to run entirely on **Free Tiers**. Below 
 When moving from local development to production, you must configure your environment variables in your hosting provider's dashboard.
 
 ### 📐 Vercel Setup
-1.  Go to your Project Dashboard on Vercel.
-2.  Navigate to **Settings** > **Environment Variables**.
-3.  Add all keys found in `.env.example` (e.g., `NEXT_PUBLIC_SUPABASE_URL`).
-4.  Re-deploy the application for changes to take effect.
+You should create **two separate projects** in Vercel:
+
+1.  **Patient Website**: Set Root Directory to `apps/client/web`.
+2.  **Staff Hub**: Set Root Directory to `apps/staff/hub`.
+
+*   **Crucial:** Ensure the option **"Include source files outside of the Root Directory"** is enabled so the apps can access the shared `packages/` folder.
+*   **Environment Variables**: Add all keys found in `.env.example`.
 
 ### 🏠 Hostinger Setup (Managed Node.js)
 1.  Go to your **Hostinger Panel** > **Node.js Dashboard**.
@@ -145,12 +183,39 @@ All external tools should be developed within:
 `apps/staff/hub/app/external/your-module-name/`
 
 ### 2. Use the Design System
-**DO NOT** create custom CSS or unbranded buttons. You must import components from:
-*   **`@livfit/ui`**: Use this for all Buttons, Cards, Inputs, and Players.
-*   **Tailwind CSS v4**: Follow the theme tokens defined in `globals.css`.
+**DO NOT** create custom CSS or unbranded buttons. You must use the unified Design System to ensure brand consistency across all tools.
 
-### 3. Shared Logic
-Use **`@livfit/lib`** for all database queries (Supabase) and shared business logic. If you need a new database table, coordinate with the Lead Admin.
+#### How to use @livfit/ui:
+Import components directly from the workspace package:
+
+```tsx
+import { Button, Card, Input, Label, Sidebar } from "@livfit/ui";
+
+export default function MyVendorModule() {
+  return (
+    <Card className="p-6">
+      <Label>Project Name</Label>
+      <Input placeholder="Enter details..." />
+      <Button variant="primary">Submit Data</Button>
+    </Card>
+  );
+}
+```
+
+#### Available UI Components:
+*   **Layout**: `Sidebar` (generic navigation), `Card` (content containers).
+*   **Forms**: `Input`, `Label`, `Checkbox`, `Switch`, `Textarea`.
+*   **Actions**: `Button` (with primary, ghost, and destructive variants).
+*   **Media**: `YoutubePlayer` (supports 16:9 and 9:16 vertical modes).
+*   **Feedback**: `Badge` (status chips).
+
+### 3. Shared Logic & Utilities
+*   **`@livfit/lib`**: Use this for all database queries (Supabase) and shared business logic.
+*   **`cn()` Utility**: For tailwind class merging, import from `@livfit/ui`:
+    ```tsx
+    import { cn } from "@livfit/ui";
+    // Usage: <div className={cn("base-class", condition && "active-class")} />
+    ```
 
 ### 4. Environment Setup
 1.  Copy `apps/staff/hub/.env.example` to `.env`.
@@ -159,5 +224,6 @@ Use **`@livfit/lib`** for all database queries (Supabase) and shared business lo
 
 ### 5. Code Standards
 *   **TypeScript**: All new code must be 100% Type-safe.
+*   **Tailwind v4**: Follow the theme tokens defined in `globals.css`. Do not use arbitrary values unless absolutely necessary.
 *   **Linting**: Run `pnpm lint` before submitting a Pull Request.
 *   **PR Review**: All external code must be reviewed by the LivFit Core Team.

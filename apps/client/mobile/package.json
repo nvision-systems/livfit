@@ -3,8 +3,8 @@
   "private": true,
   "main": "expo-router/entry",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development expo start --port 8081",
-    "start": "cross-env NODE_ENV=production expo start",
+    "dev": "expo start --port 8081",
+    "start": "expo start",
     "clean": "rimraf .expo .turbo"
   },
   "dependencies": {

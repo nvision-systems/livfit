@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@livfit/lib": ["../lib/src/index.ts"],
+      "@livfit/lib/*": ["../lib/src/*"]
+    }
+  },
+  "include": ["src"]
+}

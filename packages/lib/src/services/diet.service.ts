@@ -1,17 +1,25 @@
 import { dietRepository } from '../repositories/diet.repository';
+import { DietPlan, DietLog, DietMeal } from '../types';
 
 export class DietService {
-  async getPlans() {
-    return dietRepository.getPlans();
+  async getPlans(userId: string) {
+    return dietRepository.getPlans(userId);
   }
 
-  async getActivePlan() {
-    return dietRepository.getActivePlan();
+  async getLogs(userId: string) {
+    return dietRepository.getLogs(userId);
   }
 
-  async updatePlan(planId: number, planData: any) {
-    // Clinical validation: ensure calories/protein are within safe limits
-    return dietRepository.updatePlan(planId, planData);
+  async logMeal(log: Partial<DietLog>) {
+    return dietRepository.logMeal(log);
+  }
+
+  async createPlan(plan: Partial<DietPlan>, meals: Partial<DietMeal>[]) {
+    return dietRepository.createPlan(plan, meals);
+  }
+
+  async updatePlan(id: number, updates: Partial<DietPlan>) {
+    return dietRepository.updatePlan(id, updates);
   }
 }
 

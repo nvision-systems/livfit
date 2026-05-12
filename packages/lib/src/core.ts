@@ -1,12 +1,4 @@
-export type UserRole = 'USER' | 'DIETICIAN' | 'ADMIN' | 'SUPER_ADMIN';
-
-export interface User {
-  id: string;
-  email: string;
-  role: UserRole;
-  fullName: string;
-  phone?: string;
-}
+import { UserRole } from './types';
 
 export interface BodyMetrics {
   gender: 'male' | 'female' | 'other';
@@ -46,19 +38,33 @@ export const getWorkoutIntensity = (meldScore: number) => {
 
 export const WORKOUT_TEMPLATES = {
   VERY_LOW: [
-    { id: 1, name: 'Diaphragmatic Breathing', duration: 10, type: 'Breathing' },
-    { id: 2, name: 'Ankle Pumps', duration: 5, type: 'Mobility' },
-    { id: 3, name: 'Seated Arm Circles', duration: 5, type: 'Mobility' },
+    { id: 1, name: 'Diaphragmatic Breathing', duration: 600, sets: 1, reps: 1, type: 'Breathing' },
+    { id: 2, name: 'Ankle Pumps', duration: 300, sets: 2, reps: 15, type: 'Mobility' },
+    { id: 3, name: 'Seated Arm Circles', duration: 300, sets: 2, reps: 10, type: 'Mobility' },
   ],
   LOW: [
-    { id: 4, name: 'Casual Walking', duration: 15, type: 'Cardio' },
-    { id: 5, name: 'Seated Leg Extensions', duration: 10, type: 'Strength' },
-    { id: 6, name: 'Wall Push-ups', duration: 5, type: 'Strength' },
+    { id: 4, name: 'Casual Walking', duration: 900, sets: 1, reps: 1, type: 'Cardio' },
+    { id: 5, name: 'Seated Leg Extensions', duration: 600, sets: 3, reps: 10, type: 'Strength' },
+    { id: 6, name: 'Wall Push-ups', duration: 300, sets: 2, reps: 8, type: 'Strength' },
   ],
   MODERATE: [
-    { id: 7, name: 'Brisk Walking', duration: 20, type: 'Cardio' },
-    { id: 8, name: 'Bodyweight Squats', duration: 12, type: 'Strength' },
-    { id: 9, name: 'Resistance Band Rows', duration: 10, type: 'Strength' },
+    { id: 7, name: 'Brisk Walking', duration: 1200, sets: 1, reps: 1, type: 'Cardio' },
+    { id: 8, name: 'Bodyweight Squats', duration: 720, sets: 3, reps: 12, type: 'Strength' },
+    { id: 9, name: 'Resistance Band Rows', duration: 600, sets: 3, reps: 12, type: 'Strength' },
   ],
 };
 
+/**
+ * Calculates the Prehab Readiness Score based on the Tri-Factor model:
+ * 1. Physical Adherence (Workout) - 40%
+ * 2. Nutritional Precision (Diet) - 40%
+ * 3. Educational Literacy (Blogs/Learning) - 20%
+ */
+export const calculatePrehabReadiness = (
+  workoutCompliance: number, // 0-1
+  dietCompliance: number,    // 0-1
+  literacyCompliance: number // 0-1
+): number => {
+  const score = (workoutCompliance * 0.4) + (dietCompliance * 0.4) + (literacyCompliance * 0.2);
+  return Math.round(score * 100);
+};

@@ -1,25 +1,39 @@
 import { workoutRepository } from '../repositories/workout.repository';
 import { getWorkoutIntensity, WORKOUT_TEMPLATES } from '../core';
+import { WorkoutPlan, WorkoutLog, WorkoutExercise } from '../types';
 
 export class WorkoutService {
-  async getUserPlans() {
-    return workoutRepository.getPlans();
+  async getUserPlans(userId: string) {
+    return workoutRepository.getPlans(userId);
   }
 
-  async generatePlan(meldScore: number) {
+  async generatePlan(userId: string, meldScore: number) {
     const intensity = getWorkoutIntensity(meldScore);
-    const exercises = this.buildExercisesFromRules(intensity);
-    // Logic to save plan to repository would go here
-    return { intensity, exercises };
+    const template = WORKOUT_TEMPLATES[intensity as keyof typeof WORKOUT_TEMPLATES] || WORKOUT_TEMPLATES.VERY_LOW;
+    
+    const plan: Partial<WorkoutPlan> = {
+      user_id: userId,
+      name: `Plan for MELD ${meldScore} (${intensity})`,
+      intensity: intensity,
+      is_active: true,
+    };
+
+    const exercises: Partial<WorkoutExercise>[] = template.map((ex) => ({
+      name: ex.name,
+      sets: ex.sets,
+      reps: ex.reps,
+      duration_secs: ex.duration,
+    }));
+
+    return workoutRepository.createPlan(plan, exercises);
   }
 
-  buildExercisesFromRules(intensity: string) {
-    return WORKOUT_TEMPLATES[intensity as keyof typeof WORKOUT_TEMPLATES] || WORKOUT_TEMPLATES.VERY_LOW;
+  async logExercise(log: Partial<WorkoutLog>) {
+    return workoutRepository.logExercise(log);
   }
 
-  async logWorkout(workoutId: number, metrics: any) {
-    // Business validation (e.g. heart rate check) could happen here
-    return workoutRepository.logCompletion(workoutId, metrics);
+  async getLogs(userId: string) {
+    return workoutRepository.getLogs(userId);
   }
 }
 

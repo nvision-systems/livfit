@@ -124,16 +124,31 @@ export const uploadWorkoutVideo = (videoUri: string) => {
 
 // MELD calculation is handled in core.ts
 
-import { supabase } from './supabase';
+import { supabase } from './supabase/client';
 
-// Auth API (Real Supabase)
+// Auth API
+import { isSupabaseConfigured } from './supabase/client';
+import { mockDemoUsers } from './data';
+
 export const login = async (email: string, password: string) => {
+  if (!isSupabaseConfigured) {
+    // Demo Mode: Map emails to specific professional profiles
+    let mockUser: any = mockDemoUsers.patient;
+    if (email.includes('dr') || email.includes('alice')) mockUser = mockDemoUsers.hepatologist;
+    else if (email.includes('staff') || email.includes('admin')) mockUser = mockDemoUsers.admin;
+    else if (email.includes('sarah')) mockUser = mockDemoUsers.dietician;
+    
+    return { user: { ...mockUser, email }, session: { access_token: 'demo' } };
+  }
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;
   return data;
 };
 
 export const signup = async (email: string, password: string, metadata: any) => {
+  if (!isSupabaseConfigured) {
+    return { user: { email, user_metadata: metadata }, session: { access_token: 'demo' } };
+  }
   const { data, error } = await supabase.auth.signUp({ 
     email, 
     password, 

@@ -2,9 +2,9 @@
   "name": "@livfit/web",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development next dev -p 7000",
-    "build": "cross-env NODE_ENV=production next build",
-    "lint": "cross-env NODE_ENV=production next lint",
+    "dev": "next dev -p 7000",
+    "build": "next build",
+    "check-lint": "eslint .",
     "clean": "rimraf .next .turbo"
   },
   "dependencies": {

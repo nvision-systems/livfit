@@ -2,9 +2,11 @@ import { NextResponse } from 'next/server';
 import { dietService } from '../services/diet.service';
 
 export const dietController = {
-  async getPlans() {
+  async getPlans(request: Request) {
     try {
-      const plans = await dietService.getPlans();
+      const { searchParams } = new URL(request.url);
+      const userId = searchParams.get('userId') || 'patient-1'; // Default to demo user if not provided
+      const plans = await dietService.getPlans(userId);
       return NextResponse.json(plans);
     } catch (error) {
       return NextResponse.json({ error: 'Failed to fetch diet plans' }, { status: 500 });

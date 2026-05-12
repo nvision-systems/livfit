@@ -2,9 +2,10 @@ import { blogController } from '@livfit/lib';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  return blogController.getById(params.id);
+  const { id } = await params;
+  return blogController.getById(id);
 }
 
 // ... other handlers (PUT/DELETE) can be added to controller similarly

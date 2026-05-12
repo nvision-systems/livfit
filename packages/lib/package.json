@@ -5,7 +5,7 @@
   "types": "src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./middleware": "./src/middleware/auth_logic.ts"
+    "./auth-proxy": "./src/proxy/auth_logic.ts"
   },
   "private": true,
   "dependencies": {

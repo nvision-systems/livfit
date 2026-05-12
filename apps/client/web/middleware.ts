@@ -1,5 +1,5 @@
 import { type NextRequest } from 'next/server';
-import { validateClinicalSession } from '@livfit/lib/middleware';
+import { validateClinicalSession } from '@livfit/lib';
 
 export async function middleware(request: NextRequest) {
   const { response } = await validateClinicalSession(request, [
