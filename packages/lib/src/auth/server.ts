@@ -2,38 +2,24 @@ import { supabase, isSupabaseConfigured } from '../supabase/client';
 import { mockDemoUsers } from '../data';
 
 export const getServerSession = async () => {
+  // If in browser, check localStorage for mock session
+  if (typeof window !== 'undefined') {
+    const demoSession = localStorage.getItem('livfit_demo_session');
+    if (demoSession) {
+      try {
+        return JSON.parse(demoSession);
+      } catch (e) {
+        console.error('Failed to parse demo session', e);
+      }
+    }
+  }
+
   if (!isSupabaseConfigured) {
-    return {
-      user: {
-        ...mockDemoUsers.patient,
-        id: 'patient-1',
-        user_metadata: mockDemoUsers.patient,
-        app_metadata: { role: 'patient' }
-      },
-      expires_at: Math.floor(Date.now() / 1000) + 3600,
-      access_token: 'demo-token',
-      refresh_token: 'demo-refresh',
-    };
+    return null; 
   }
 
   const { data: { session }, error } = await supabase.auth.getSession();
-  
-  if (!session) {
-    // SILENT AUTH FOR DEMO IF SUPABASE IS LIVE BUT NO SESSION
-    return {
-      user: {
-        ...mockDemoUsers.patient,
-        id: 'patient-1',
-        user_metadata: mockDemoUsers.patient,
-        app_metadata: { role: 'patient' }
-      },
-      expires_at: Math.floor(Date.now() / 1000) + 3600,
-      access_token: 'demo-token',
-      refresh_token: 'demo-refresh',
-    };
-  }
-  
-  return session;
+  return session || null;
 };
 
 export const requireAuth = async () => {

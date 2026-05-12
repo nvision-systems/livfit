@@ -1,23 +1,25 @@
+import { PatientRecord } from './types';
+
 export const mockDemoUsers = {
   admin: {
     id: 'admin-1',
     name: 'System Admin',
     email: 'admin@livfit.app',
-    role: 'admin',
+    role: 'ADMIN',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=admin'
   },
   superadmin: {
     id: 'super-1',
     name: 'Super User',
     email: 'super@livfit.app',
-    role: 'superadmin',
+    role: 'SUPERADMIN',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=super'
   },
   dietician: {
     id: 'dietician-1',
     name: 'Dr. Sarah Smith',
     email: 'sarah@livfit.app',
-    role: 'dietician',
+    role: 'DIETICIAN',
     specialty: 'Hepatology Nutrition',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarah'
   },
@@ -58,7 +60,7 @@ export const mockDemoUsers = {
     id: 'patient-1',
     name: 'John Doe',
     email: 'john@example.com',
-    role: 'patient',
+    role: 'PATIENT',
     age: 30,
     diagnosis: 'Cirrhosis',
     meldScore: 12,
@@ -164,4 +166,12 @@ export const meldThresholds = {
   serious: { min: 19, max: 24, color: '#f97316', label: 'Serious' },
   critical: { min: 25, max: 40, color: '#ef4444', label: 'Critical' },
 };
+
+export const mockPatients: PatientRecord[] = [
+  { name: "John Doe", id: "P-101", risk: "High", compliance: 45, status: "Awaiting Plan", lastLogged: "2h ago", meldScore: 28 },
+  { name: "Jane Smith", id: "P-102", risk: "Medium", compliance: 88, status: "On Plan", lastLogged: "15m ago", meldScore: 14 },
+  { name: "Alice Wong", id: "P-103", risk: "Low", compliance: 95, status: "Stabilized", lastLogged: "1h ago", meldScore: 11 },
+  { name: "Robert Miller", id: "P-104", risk: "High", compliance: 30, status: "Critical Review", lastLogged: "5m ago", meldScore: 32 },
+  { name: "Sarah Jenkins", id: "P-105", risk: "Medium", compliance: 72, status: "On Plan", lastLogged: "3h ago", meldScore: 18 },
+];
 

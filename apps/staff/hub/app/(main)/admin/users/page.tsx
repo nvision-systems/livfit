@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, Button, Badge, Input, cn } from "@livfit/ui";
 import { Search, UserCog, Shield, MoreVertical, Mail } from "lucide-react";
-import { userRepository, Patient } from "@livfit/lib";
+import { userRepository, UserProfile } from "@livfit/lib";
 
 export default function UserManagementPage() {
-  const [users, setUsers] = useState<Patient[]>([]);
+  const [users, setUsers] = useState<UserProfile[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

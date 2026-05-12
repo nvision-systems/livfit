@@ -24,6 +24,16 @@ export default function PatientDashboard() {
           getUser(),
           dietRepository.getActivePlan ? dietRepository.getActivePlan() : Promise.resolve({ name: "General Health" })
         ]);
+        
+        // Role-based Redirection Logic
+        const role = u?.role?.toUpperCase();
+        if (role && role !== 'PATIENT') {
+          if (role === 'ADMIN') window.location.href = 'http://localhost:7001/admin/assignments';
+          else if (role === 'DIETICIAN') window.location.href = 'http://localhost:7001/dietician';
+          else window.location.href = 'http://localhost:7001/external';
+          return;
+        }
+
         setSummary(s);
         setUser(u);
         setDietPlan(d);

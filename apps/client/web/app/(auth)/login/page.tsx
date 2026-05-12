@@ -64,6 +64,59 @@ export default function LoginPage() {
           </div>
 
           <LoginForm onSuccessRedirect="/" type="patient" />
+
+          <div className="mt-8 pt-8 border-t border-slate-200">
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 text-center">Developer Access</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button 
+                onClick={async () => {
+                  const { login } = await import("@livfit/lib");
+                  await login("john@example.com", "password");
+                  window.location.href = "/";
+                }}
+                className="py-3 px-4 rounded-xl bg-white hover:bg-slate-50 text-slate-600 text-xs font-bold border border-slate-200 transition-all flex items-center justify-between group"
+              >
+                <span>Patient</span>
+                <Heart className="h-4 w-4 text-slate-300 group-hover:text-red-500" />
+              </button>
+              
+              <button 
+                onClick={async () => {
+                  const { login } = await import("@livfit/lib");
+                  await login("admin@livfit.app", "password");
+                  window.location.href = "/";
+                }}
+                className="py-3 px-4 rounded-xl bg-white hover:bg-slate-50 text-slate-600 text-xs font-bold border border-slate-200 transition-all flex items-center justify-between group"
+              >
+                <span>Admin</span>
+                <ShieldCheck className="h-4 w-4 text-slate-300 group-hover:text-blue-500" />
+              </button>
+
+              <button 
+                onClick={async () => {
+                  const { login } = await import("@livfit/lib");
+                  await login("sarah@livfit.app", "password");
+                  window.location.href = "/";
+                }}
+                className="py-3 px-4 rounded-xl bg-white hover:bg-slate-50 text-slate-600 text-xs font-bold border border-slate-200 transition-all flex items-center justify-between group"
+              >
+                <span>Dietician</span>
+                <Activity className="h-4 w-4 text-slate-300 group-hover:text-emerald-500" />
+              </button>
+
+              <button 
+                onClick={async () => {
+                  const { login } = await import("@livfit/lib");
+                  await login("alice@livercenter.org", "password");
+                  window.location.href = "/";
+                }}
+                className="py-3 px-4 rounded-xl bg-white hover:bg-slate-50 text-slate-600 text-xs font-bold border border-slate-200 transition-all flex items-center justify-between group"
+              >
+                <span>External</span>
+                <ShieldCheck className="h-4 w-4 text-slate-300 group-hover:text-orange-500" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

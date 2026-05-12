@@ -138,7 +138,14 @@ export const login = async (email: string, password: string) => {
     else if (email.includes('staff') || email.includes('admin')) mockUser = mockDemoUsers.admin;
     else if (email.includes('sarah')) mockUser = mockDemoUsers.dietician;
     
-    return { user: { ...mockUser, email }, session: { access_token: 'demo' } };
+    const sessionData = { user: { ...mockUser, email, app_metadata: { role: mockUser.role } }, session: { access_token: 'demo' } };
+    
+    // Persist mock session for cross-page navigation in demo mode
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('livfit_demo_session', JSON.stringify(sessionData));
+    }
+    
+    return sessionData;
   }
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) throw error;

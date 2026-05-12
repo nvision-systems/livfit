@@ -1,8 +1,24 @@
 import { supabase, isSupabaseConfigured } from '../supabase/client';
-import { UserProfile, UserPreferences } from '../types';
-import { mockDemoUsers } from '../data';
+import { UserProfile, UserPreferences, PatientRecord } from '../types';
+import { mockDemoUsers, mockPatients } from '../data';
+import { getServerSession } from '../auth/server';
 
 export class UserRepository {
+  async getCurrentProfile(): Promise<UserProfile | null> {
+    const session = await getServerSession();
+    if (!session?.user) return null;
+    
+    // In demo mode, the session user already contains the mock metadata
+    if (!isSupabaseConfigured) {
+      return {
+        ...session.user,
+        role: session.user.app_metadata?.role as any
+      } as any;
+    }
+
+    return this.getProfile(session.user.id);
+  }
+
   async getProfile(userId: string): Promise<UserProfile | null> {
     if (!isSupabaseConfigured) return mockDemoUsers.patient as any;
 
@@ -64,6 +80,28 @@ export class UserRepository {
 
     if (error) throw error;
     return data || [];
+  }
+
+  async getClinicalQueue(): Promise<PatientRecord[]> {
+    if (!isSupabaseConfigured) return mockPatients;
+    
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('role', 'PATIENT');
+    
+    if (error) throw error;
+    
+    // Map UserProfile to PatientRecord for the clinical portal
+    return data.map((u: any) => ({
+      id: u.id,
+      name: u.full_name || u.name,
+      risk: (u.risk as any) || 'Medium',
+      compliance: u.compliance || 75,
+      status: u.status || 'On Plan',
+      lastLogged: u.last_logged || '1d ago',
+      meldScore: u.meld_score || 15
+    }));
   }
 }
 

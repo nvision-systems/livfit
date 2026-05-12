@@ -8,7 +8,6 @@ export * from './repositories/diet.repository';
 export * from './repositories/blog.repository';
 export * from './repositories/notification.repository';
 export * from './repositories/user.repository';
-export * from './repositories/patient.repository';
 
 // Controllers
 export * from './controllers/workout.controller';

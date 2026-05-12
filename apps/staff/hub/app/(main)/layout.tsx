@@ -3,7 +3,7 @@
 import { Sidebar } from "@livfit/ui";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getServerSession } from "@livfit/lib";
+import { userRepository } from "@livfit/lib";
 
 export default function MainLayout({
   children,
@@ -15,9 +15,9 @@ export default function MainLayout({
 
   useEffect(() => {
     const checkSession = async () => {
-      const session = await getServerSession();
-      if (session?.user?.app_metadata?.role) {
-        setRole(session.user.app_metadata.role);
+      const profile = await userRepository.getCurrentProfile();
+      if (profile?.role) {
+        setRole(profile.role);
       }
     };
     checkSession();
@@ -29,7 +29,7 @@ export default function MainLayout({
 
   return (
     <div className="flex min-h-screen bg-slate-50/50">
-      <Sidebar role="staff" onLogout={handleLogout} />
+      <Sidebar role={role} onLogout={handleLogout} />
       <main className="flex-1 p-8 overflow-y-auto">
         <div className="mx-auto max-w-7xl">
           {children}

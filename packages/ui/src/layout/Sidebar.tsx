@@ -70,7 +70,10 @@ export function Sidebar({ role = "patient", onLogout, className }: SidebarProps)
 
       {/* Navigation */}
       <nav className="flex-1 px-4 space-y-2 mt-4">
-        {items.map((item) => {
+        {items.filter(item => {
+          if (!item.roles) return true;
+          return item.roles.includes(role.toUpperCase());
+        }).map((item) => {
           const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           return (
             <Link 

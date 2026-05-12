@@ -2,8 +2,8 @@
   "name": "@livfit/staff",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 7001",
-    "build": "next build",
+    "dev": "next dev -p 7001 --webpack",
+    "build": "next build --webpack",
     "check-lint": "eslint .",
     "clean": "rimraf .next .turbo"
   },

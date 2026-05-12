@@ -3,8 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Switch, Key
 import { login } from '@livfit/lib';
 import { useRouter } from 'expo-router';
 import { 
-  Heart, ArrowRight, Eye, EyeOff, Github, 
-  Chrome, Apple, Lock, Mail, Smartphone
+  Heart, ArrowRight, Eye, EyeOff, Tv, 
+  Computer, Apple, Lock, Mail, Smartphone
 } from 'lucide-react-native';
 
 export default function LoginScreen() {
@@ -131,13 +131,13 @@ export default function LoginScreen() {
 
             <View style={styles.socialBtns}>
               <TouchableOpacity style={styles.socialBtn}>
-                <Chrome color="#1C1C1E" size={24} />
+                <Computer color="#1C1C1E" size={24} />
               </TouchableOpacity>
               <TouchableOpacity style={[styles.socialBtn, { marginHorizontal: 16 }]}>
                 <Apple color="#1C1C1E" size={24} />
               </TouchableOpacity>
               <TouchableOpacity style={styles.socialBtn}>
-                <Github color="#1C1C1E" size={24} />
+                <Tv color="#1C1C1E" size={24} />
               </TouchableOpacity>
             </View>
 
@@ -326,4 +326,4 @@ const styles = StyleSheet.create({
     color: '#2D5AF0',
     fontWeight: '800',
   },
-});
+});

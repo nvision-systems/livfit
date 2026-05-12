@@ -1,5 +1,15 @@
 export type UserRole = 'ADMIN' | 'DIETICIAN' | 'PATIENT' | 'SUPERADMIN' | 'DOCTOR' | 'SPECIALIST' | 'RESEARCHER' | 'INSURANCE' | 'HEALTH_EDUCATOR' | 'HEPATOLOGIST' | 'TRANSPLANT_COORDINATOR' | 'GASTROENTEROLOGIST' | 'SURGEON';
 
+export interface PatientRecord {
+  id: string;
+  name: string;
+  risk: 'High' | 'Medium' | 'Low';
+  compliance: number;
+  status: string;
+  lastLogged: string;
+  meldScore: number;
+}
+
 export interface UserProfile {
   id: string;
   full_name: string;
