@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { 
   ShieldCheck, UserCog, ExternalLink, 
@@ -22,17 +22,18 @@ export default function StaffHubLandingPage() {
         const clinicalRoles = ['HEPATOLOGIST', 'TRANSPLANT_COORDINATOR', 'GASTROENTEROLOGIST', 'SURGEON', 'DOCTOR', 'SPECIALIST'];
         
         if (role === 'ADMIN' || role === 'SUPERADMIN') {
-          router.push('/admin/assignments');
+          router.push('/ops');
         } else if (role === 'DIETICIAN') {
-          router.push('/dietician');
+          router.push('/clinical');
         } else if (role === 'HEALTH_EDUCATOR') {
-          router.push('/content/blogs');
+          router.push('/academy');
         } else if (clinicalRoles.includes(role)) {
           router.push('/external');
         } else {
           setLoading(false);
         }
       } else {
+        console.warn("StaffHubLanding: No profile found. Staying on page for demo.");
         setLoading(false);
       }
     };
@@ -81,7 +82,7 @@ export default function StaffHubLandingPage() {
         {/* Workspace Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {/* Admin Workspace */}
-          <div className="group cursor-pointer" onClick={() => handleMockLogin("admin@livfit.app", "/admin/assignments")}>
+          <div className="group cursor-pointer" onClick={() => handleMockLogin("admin@livfit.app", "/admin")}>
             <div className="h-full p-8 rounded-4xl bg-white border border-slate-200 shadow-sm hover:shadow-2xl hover:shadow-blue-900/5 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
               <div className="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500">
                 <UserCog className="h-40 w-40" />
@@ -127,7 +128,7 @@ export default function StaffHubLandingPage() {
           </div>
 
           {/* Content Creator Workspace */}
-          <div className="group cursor-pointer" onClick={() => handleMockLogin("jane@livfit.app", "/content/blogs")}>
+          <div className="group cursor-pointer" onClick={() => handleMockLogin("jane@livfit.app", "/content")}>
             <div className="h-full p-8 rounded-4xl bg-white border border-slate-200 shadow-sm hover:shadow-2xl hover:shadow-purple-900/5 hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
               <div className="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500">
                 <BookOpen className="h-40 w-40" />

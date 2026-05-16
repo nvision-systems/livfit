@@ -48,8 +48,8 @@ export async function createSharedProxy(request: NextRequest) {
 export async function validateClinicalSession(request: NextRequest, protectedPaths: string[]) {
   const pathname = request.nextUrl.pathname;
 
-  // REDIRECT GUARD: Never run auth logic on login/signup to prevent loops
-  if (pathname === '/login' || pathname === '/signup') {
+  // REDIRECT GUARD: Never run auth logic on login/signup or the public landing page to prevent loops
+  if (pathname === '/login' || pathname === '/signup' || pathname === '/') {
     return { response: NextResponse.next(), user: null, profile: null, supabase: null };
   }
 
@@ -72,25 +72,19 @@ export async function validateClinicalSession(request: NextRequest, protectedPat
     }
   }
 
-  // SILENT AUTH BYPASS FOR DEMO (If no real user or no Supabase connection)
-  if (!user) {
-    let mockUser: any = mockDemoUsers.patient;
-    
-    if (pathname.includes('/admin')) {
-      mockUser = mockDemoUsers.admin;
-    } else if (pathname.includes('/dietician')) {
-      mockUser = mockDemoUsers.dietician;
-    }
+  // Check if current path is protected
+  const isProtected = protectedPaths.some(path => pathname.startsWith(path));
 
-    // Transform mockUser to match Supabase user/profile structure minimally
-    const demoUser = {
-      id: mockUser.id,
-      email: mockUser.email,
-      user_metadata: mockUser,
-      app_metadata: { role: mockUser.role }
-    };
-    
-    return { response, user: demoUser, profile: mockUser, supabase };
+  // If no real session and path is protected, redirect to login
+  if (!user && isProtected) {
+    // In strict demo mode, we might want to skip redirection for now to allow local dev
+    // but for the landing page task, we must ensure unauthenticated users land on /
+    return { response: NextResponse.redirect(new URL('/login', request.url)), user: null, profile: null, supabase };
+  }
+
+  // If no real session and path is NOT protected (like /), allow access
+  if (!user && !isProtected) {
+    return { response: NextResponse.next(), user: null, profile: null, supabase };
   }
 
   // RBAC Role Categories

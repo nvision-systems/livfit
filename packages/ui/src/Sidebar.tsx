@@ -1,11 +1,12 @@
 "use client";
 
-import { cn } from "../../lib/utils";
-import { Button } from "../button";
+import { cn } from "../lib/utils";
+import { Button } from "./button";
 import { 
   LayoutDashboard, Dumbbell, Utensils, MessageSquare, 
   BookOpen, Users, Settings, LogOut, ChevronLeft, ChevronRight,
-  ShieldCheck, Activity
+  ShieldCheck, Activity,
+  ShieldAlert
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,19 +20,24 @@ interface SidebarItem {
 }
 
 const patientNav: SidebarItem[] = [
-  { title: "Dashboard", href: "/", icon: LayoutDashboard },
+  { title: "Dashboard", href: "/home", icon: LayoutDashboard },
   { title: "Workouts", href: "/workouts", icon: Dumbbell },
   { title: "Nutrition", href: "/nutrition", icon: Utensils },
   { title: "Messages", href: "/messages", icon: MessageSquare },
   { title: "Learning", href: "/learning", icon: BookOpen },
+  { title: "Community", href: "/community", icon: Users },
+  { title: "My Doctors", href: "/doctors", icon: ShieldCheck },
 ];
 
 const staffNav: SidebarItem[] = [
-  { title: "Hub Home", href: "/", icon: LayoutDashboard },
-  { title: "Assignments", href: "/admin/assignments", icon: ShieldCheck, roles: ["ADMIN"] },
-  { title: "User Management", href: "/admin/users", icon: Users, roles: ["ADMIN"] },
-  { title: "Clinical Plans", href: "/dietician", icon: Activity, roles: ["DIETICIAN", "ADMIN"] },
-  { title: "Content Engine", href: "/content", icon: BookOpen, roles: ["ADMIN", "HEALTH_EDUCATOR"] },
+  { title: "Hub Home", href: "/home", icon: LayoutDashboard },
+  { title: "Assignments", href: "/ops/assignments", icon: ShieldCheck, roles: ["ADMIN", "SUPERADMIN", "HEPATOLOGIST"] },
+  { title: "User Management", href: "/ops/users", icon: Users, roles: ["ADMIN", "SUPERADMIN", "HEPATOLOGIST"] },
+  { title: "Clinical Plans", href: "/clinical", icon: Activity, roles: ["DIETICIAN", "ADMIN", "SUPERADMIN", "HEPATOLOGIST"] },
+  { title: "Academy Node", href: "/academy", icon: BookOpen, roles: ["ADMIN", "SUPERADMIN", "HEALTH_EDUCATOR", "HEPATOLOGIST"] },
+  { title: "Specialist Hub", href: "/external", icon: Activity, roles: ["ADMIN", "SUPERADMIN", "HEPATOLOGIST", "TRANSPLANT_COORDINATOR"] },
+  { title: "Clinical Trials", href: "/trials", icon: ShieldCheck, roles: ["ADMIN", "SUPERADMIN", "DIETICIAN", "HEPATOLOGIST"] },
+  { title: "System Audit", href: "/audit", icon: ShieldAlert, roles: ["SUPERADMIN"] },
 ];
 
 export interface SidebarProps {
@@ -47,7 +53,7 @@ export function Sidebar({ role = "patient", onLogout, className }: SidebarProps)
 
   return (
     <div className={cn(
-      "h-screen sticky top-0 bg-white border-r border-slate-200 flex flex-col transition-all duration-300 ease-in-out",
+      "h-screen sticky top-0 bg-white border-r border-slate-200 flex flex-col flex-shrink-0 transition-all duration-300 ease-in-out",
       collapsed ? "w-[80px]" : "w-[280px]",
       className
     )}>
@@ -69,7 +75,7 @@ export function Sidebar({ role = "patient", onLogout, className }: SidebarProps)
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 space-y-2 mt-4">
+      <nav className="flex-1 px-4 space-y-2 mt-4 overflow-y-auto custom-scrollbar">
         {items.filter(item => {
           if (!item.roles) return true;
           return item.roles.includes(role.toUpperCase());

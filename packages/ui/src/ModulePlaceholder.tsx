@@ -1,10 +1,10 @@
 "use client";
 
-import { Card, CardContent } from "../card";
-import { Badge } from "../badge";
-import { Button } from "../button";
+import { Card, CardContent } from "./card";
+import { Badge } from "./badge";
+import { Button } from "./button";
 import { Activity, Layout, ChevronRight } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 interface ModulePlaceholderProps {
   title: string;

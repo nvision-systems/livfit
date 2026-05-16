@@ -131,18 +131,35 @@ import { isSupabaseConfigured } from './supabase/client';
 import { mockDemoUsers } from './data';
 
 export const login = async (email: string, password: string) => {
+  console.log("LIB: [LOGIN_ATTEMPT]", { email, isSupabaseConfigured });
   if (!isSupabaseConfigured) {
     // Demo Mode: Map emails to specific professional profiles
     let mockUser: any = mockDemoUsers.patient;
-    if (email.includes('dr') || email.includes('alice')) mockUser = mockDemoUsers.hepatologist;
-    else if (email.includes('staff') || email.includes('admin')) mockUser = mockDemoUsers.admin;
-    else if (email.includes('sarah')) mockUser = mockDemoUsers.dietician;
+    const normalizedEmail = email.toLowerCase();
     
-    const sessionData = { user: { ...mockUser, email, app_metadata: { role: mockUser.role } }, session: { access_token: 'demo' } };
+    if (normalizedEmail.includes('super')) {
+      mockUser = mockDemoUsers.superadmin;
+    } else if (normalizedEmail.includes('alice') || normalizedEmail.includes('hep')) {
+      mockUser = mockDemoUsers.hepatologist;
+    } else if (normalizedEmail.includes('admin') || normalizedEmail.includes('staff')) {
+      mockUser = mockDemoUsers.admin;
+    } else if (normalizedEmail.includes('sarah') || normalizedEmail.includes('diet')) {
+      mockUser = mockDemoUsers.dietician;
+    } else if (normalizedEmail.includes('jane') || normalizedEmail.includes('edit')) {
+      mockUser = mockDemoUsers.editor;
+    }
     
-    // Persist mock session for cross-page navigation in demo mode
+    const sessionData = { 
+      user: { ...mockUser, email: normalizedEmail, app_metadata: { role: mockUser.role } }, 
+      session: { access_token: 'demo-' + Math.random().toString(36).substr(2, 9) } 
+    };
+    
+    console.log("LIB: [LOGIN_MOCK] Selected User:", mockUser.role);
+    
+    // Persist mock session
     if (typeof window !== 'undefined') {
       localStorage.setItem('livfit_demo_session', JSON.stringify(sessionData));
+      console.log("LIB: [STORAGE_SYNC] Session persisted to localStorage");
     }
     
     return sessionData;

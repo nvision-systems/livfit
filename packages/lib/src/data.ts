@@ -1,26 +1,37 @@
 import { PatientRecord } from './types';
 
+export const SYSTEM_ROLES = {
+  SUPERADMIN: { id: 'r0', name: 'Platform Administrator', color: 'slate', description: 'System-wide oversight & infrastructure governance' },
+  ADMIN: { id: 'r1', name: 'Operations Manager', color: 'blue', description: 'Manages staff assignments, clients, and external partners' },
+  DIETICIAN: { id: 'r2', name: 'Clinical Dietician', color: 'emerald', description: 'Nutritional protocol management' },
+  HEALTH_EDUCATOR: { id: 'r3', name: 'Health Educator', color: 'purple', description: 'Patient literacy & content engine' },
+  HEPATOLOGIST: { id: 'r4', name: 'Specialist Hepatologist', color: 'orange', description: 'External surgical readiness audit' },
+  PATIENT: { id: 'r5', name: 'Standard Patient', color: 'slate', description: 'Basic patient access' }
+};
+
 export const mockDemoUsers = {
-  admin: {
-    id: 'admin-1',
-    name: 'System Admin',
-    email: 'admin@livfit.app',
-    role: 'ADMIN',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=admin'
-  },
   superadmin: {
     id: 'super-1',
-    name: 'Super User',
+    name: 'Platform Admin',
     email: 'super@livfit.app',
     role: 'SUPERADMIN',
+    roleInfo: SYSTEM_ROLES.SUPERADMIN,
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=super'
+  },
+  admin: {
+    id: 'admin-1',
+    name: 'Vikram Singh',
+    email: 'admin@livfit.app',
+    role: 'ADMIN',
+    roleInfo: SYSTEM_ROLES.ADMIN,
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=admin'
   },
   dietician: {
     id: 'dietician-1',
     name: 'Dr. Sarah Smith',
     email: 'sarah@livfit.app',
     role: 'DIETICIAN',
-    specialty: 'Hepatology Nutrition',
+    roleInfo: SYSTEM_ROLES.DIETICIAN,
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarah'
   },
   editor: {
@@ -28,6 +39,7 @@ export const mockDemoUsers = {
     name: 'Jane Miller',
     email: 'jane@livfit.app',
     role: 'HEALTH_EDUCATOR',
+    roleInfo: SYSTEM_ROLES.HEALTH_EDUCATOR,
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=jane'
   },
   hepatologist: {
@@ -35,39 +47,28 @@ export const mockDemoUsers = {
     name: 'Dr. Alice Wong',
     email: 'alice@livercenter.org',
     role: 'HEPATOLOGIST',
-    specialty: 'Liver Transplantation',
-    organization_name: 'Metropolitan Liver Center',
+    roleInfo: SYSTEM_ROLES.HEPATOLOGIST,
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alice'
-  },
-  coordinator: {
-    id: 'coord-1',
-    name: 'Mark Stevens',
-    email: 'mark@transplant.net',
-    role: 'TRANSPLANT_COORDINATOR',
-    organization_name: 'United Transplant Network',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=mark'
-  },
-  doctor: {
-    id: 'doctor-1',
-    name: 'Dr. Gregory House',
-    email: 'house@princeton.edu',
-    role: 'DOCTOR',
-    organization_name: 'Princeton-Plainsboro Teaching Hospital',
-    specialty: 'Diagnostic Medicine',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=house'
   },
   patient: {
     id: 'patient-1',
     name: 'John Doe',
     email: 'john@example.com',
     role: 'PATIENT',
-    age: 30,
-    diagnosis: 'Cirrhosis',
-    meldScore: 12,
+    roleInfo: SYSTEM_ROLES.PATIENT,
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=john',
     isConnectedToDietician: false
   }
 };
+
+export const ROLE_REGISTRY = Object.values(SYSTEM_ROLES);
+
+export const STAFF_DIRECTORY = [
+  mockDemoUsers.admin,
+  mockDemoUsers.dietician,
+  mockDemoUsers.editor,
+  mockDemoUsers.hepatologist
+];
 
 export const mockUser = mockDemoUsers.patient;
 

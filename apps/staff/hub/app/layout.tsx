@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   description: "Unified healthcare monitoring and management platform",
 };
 
+import { Toaster } from "@livfit/ui";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,6 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} antialiased min-h-screen bg-slate-50/50`}>
         {children}
+        <Toaster />
       </body>
     </html>
   );

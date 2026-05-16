@@ -13,6 +13,7 @@
     "clean": "rimraf dist build .turbo"
   },
   "dependencies": {
+    "@livfit/lib": "workspace:*",
     "@radix-ui/react-checkbox": "^1.3.3",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
@@ -20,9 +21,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.14.0",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.5.0",
-    "tailwindcss-animate": "^1.0.7",
-    "@livfit/lib": "workspace:*"
+    "tailwindcss-animate": "^1.0.7"
   },
   "peerDependencies": {
     "next": "^16.0.0",

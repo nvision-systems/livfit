@@ -77,15 +77,38 @@ Start all applications simultaneously:
 pnpm dev
 ```
 
-#### Running the Mobile App
-You can run the mobile app using Expo. From the root:
+#### Running Individual Applications
+If you only want to run a specific application (to save system resources or focus on one portal), use the `--filter` flag:
+
+*   **Patient Web**: `pnpm dev --filter @livfit/web` (Port 7000)
+*   **Staff Hub**: `pnpm dev --filter @livfit/staff` (Port 7001)
+*   **Mobile App**: `pnpm dev --filter @livfit/mobile` (Port 8081)
+    *   *Scan the QR code with **Expo Go** (Android/iOS).*
+    *   *Press **`w`** to run in the browser.*
+    *   *Press **`a`** for Android Emulator or **`i`** for iOS Simulator.*
+*   **AI Service**: `pnpm dev --filter @livfit/ai`
+
+#### 📱 Working with Emulators
+To test the mobile app on your development machine:
+
+*   **Android Emulator**:
+    1.  Open **Android Studio** > **Device Manager**.
+    2.  Start your Virtual Device (AVD).
+    3.  Once booted, press **`a`** in the Expo terminal to sync.
+*   **iOS Simulator** (macOS only):
+    1.  Ensure **Xcode** is installed.
+    2.  Press **`i`** in the Expo terminal to boot the simulator.
+*   **Web Preview**:
+    1.  Press **`w`** in the Expo terminal to open the mobile app in your browser.
+
+You can also run commands for specific apps from the root:
 ```bash
-pnpm dev --filter @livfit/mobile
+# Build only the web app
+pnpm build --filter @livfit/web
+
+# Install a dependency to a specific app
+pnpm add <package-name> --filter @livfit/staff
 ```
-This will start the Expo development server on port 8081. You can then:
-- Scan the QR code with **Expo Go** (Android/iOS).
-- Press **`w`** to run in the browser.
-- Press **`a`** for Android Emulator or **`i`** for iOS Simulator.
 
 ### 🧹 Maintenance Commands
 We have customized scripts to handle the common "zombie process" issues in Windows development:

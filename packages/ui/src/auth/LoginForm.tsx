@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { login } from "@livfit/lib";
+import { toast } from "../toaster";
 
 export interface LoginFormProps {
   onSuccessRedirect?: string;
@@ -36,6 +37,7 @@ export function LoginForm({
       // Logic for demo/supabase
       const result = await login(email, password);
       if (result) {
+        toast.success(`Welcome back! Authorized as ${result.user.app_metadata?.role || "User"}`);
         router.push(onSuccessRedirect);
       }
     } catch (err: any) {
