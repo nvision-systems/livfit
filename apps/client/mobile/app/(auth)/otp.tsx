@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { verifyOTP } from '../../lib/api';
+import { verifyOTP } from '@livfit/lib';
 import { router } from 'expo-router';
 import { commonStyles as styles } from '../../styles';
 

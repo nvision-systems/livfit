@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { Send, User as UserIcon, MessageSquare, Info } from 'lucide-react-native';
 import { getChatHistory, sendMessage, getUser, requestDieticianConnection } from '@livfit/lib';
-import { commonStyles } from '../../../styles';
+import { commonStyles } from '../../styles';
 
 export default function ChatScreen() {
   const [user, setUser] = useState<any>(null);

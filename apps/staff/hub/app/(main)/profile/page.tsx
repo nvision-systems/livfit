@@ -6,7 +6,7 @@ import {
   User, Mail, Building, Briefcase, Award, 
   Shield, CheckCircle, Clock, Save
 } from "lucide-react";
-import { getServerSession } from "@livfit/lib";
+import { getServerSession } from "@livfit/lib/server";
 
 export default function StaffProfilePage() {
   const [user, setUser] = useState<any>(null);

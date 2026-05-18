@@ -200,4 +200,13 @@ export const resetPassword = async (email: string) => {
   return data;
 };
 
+export const verifyOTP = async (otp: string) => {
+  console.log("LIB: [OTP_VERIFICATION]", otp);
+  // Demo Mode: Allow any 6-digit code for testing compliance
+  if (otp.length === 6) {
+    return { success: true };
+  }
+  return { success: false, error: "Invalid OTP format" };
+};
+
 // ... remaining mock functions (getUser, etc.)

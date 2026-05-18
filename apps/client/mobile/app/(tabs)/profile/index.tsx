@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { getUser } from '../../lib/api';
+import { getUser } from '@livfit/lib';
 import { router } from 'expo-router';
-import { commonStyles as styles } from '../../styles';
+import { commonStyles as styles } from '../../../styles';
 
 export default function ProfileScreen() {
   const [user, setUser] = useState(null);

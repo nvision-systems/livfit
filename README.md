@@ -30,7 +30,9 @@ The platform includes a custom-built, lightweight CMS for staff to distribute ed
 
 ### Shared Packages (`/packages`)
 *   **`@livfit/ui`**: The central Design System. Shared React components (Buttons, Cards, etc.) using Tailwind CSS.
-*   **`@livfit/lib`**: Core business logic, database schemas (Supabase), and shared TypeScript types.
+*   **`@livfit/lib`**: Core business logic, database schemas, and shared TypeScript models.
+    *   `index.ts` (Client-Safe Entrypoint): Lightweight, client-friendly logic. Excludes server-only Next.js modules and controllers to prevent `next/server` compiling and throwing `__dirname is not defined` crashes inside native clients.
+    *   `server.ts` (Server-Safe Entrypoint): Full Next-specific middleware proxies, Supabase server auth, and API route controllers.
 *   **`@livfit/ai`**: (New) Centralized AI services, prompt templates, and provider integrations.
 *   **`@livfit/lib/proxy`**: Shared authentication logic and RBAC guards.
 
@@ -82,7 +84,8 @@ If you only want to run a specific application (to save system resources or focu
 
 *   **Patient Web**: `pnpm dev --filter @livfit/web` (Port 7000)
 *   **Staff Hub**: `pnpm dev --filter @livfit/staff` (Port 7001)
-*   **Mobile App**: `pnpm dev --filter @livfit/mobile` (Port 8081)
+*   **Mobile App**: `pnpm dev --filter @livfit/mobile` (Port 8085)
+    *   *Port 8085 is strictly enforced to bypass Windows security and local McAfee port locks.*
     *   *Scan the QR code with **Expo Go** (Android/iOS).*
     *   *Press **`w`** to run in the browser.*
     *   *Press **`a`** for Android Emulator or **`i`** for iOS Simulator.*

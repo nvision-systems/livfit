@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import { calculateMELD } from '../../lib/api';
+import { calculateMELD } from '@livfit/lib';
 import { router } from 'expo-router';
-import { commonStyles as styles } from '../../styles';
+import { commonStyles as styles } from '../../../styles';
 
 export default function WorkoutSetupScreen() {
   const [form, setForm] = useState({
@@ -26,7 +26,11 @@ export default function WorkoutSetupScreen() {
       Alert.alert('Error', 'Please fill all MELD fields');
       return;
     }
-    const score = await calculateMELD(parseFloat(bilirubin), parseFloat(inr), parseFloat(creatinine));
+    const score = calculateMELD({
+      bilirubin: parseFloat(bilirubin),
+      inr: parseFloat(inr),
+      creatinine: parseFloat(creatinine),
+    });
     setMeldScore(score);
   };
 

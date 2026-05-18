@@ -1,5 +1,5 @@
 import { type NextRequest } from 'next/server';
-import { validateClinicalSession } from '@livfit/lib';
+import { validateClinicalSession } from '@livfit/lib/server';
 
 export async function proxy(request: NextRequest) {
   // Protect all staff hub routes

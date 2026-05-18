@@ -1,4 +1,4 @@
-import { blogController } from '@livfit/lib';
+import { blogController } from '@livfit/lib/server';
 
 export async function GET() {
   return blogController.getAll();

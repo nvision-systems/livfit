@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
-import { calculateMELD } from '../../../packages/shared';
+import { calculateMELD } from '@livfit/lib';
 import { commonStyles } from '../../styles';
 
 export default function SetupScreen() {

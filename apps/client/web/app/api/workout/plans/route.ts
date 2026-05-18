@@ -1,4 +1,4 @@
-import { workoutController } from '@livfit/lib';
+import { workoutController } from '@livfit/lib/server';
 
 export async function GET(request: Request) {
   return workoutController.getPlans(request);

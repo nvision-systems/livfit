@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import { requestDieticianConnection } from '../../lib/api';
+import { requestDieticianConnection } from '@livfit/lib';
 import { router } from 'expo-router';
-import { commonStyles as styles } from '../../styles';
+import { commonStyles as styles } from '../../../styles';
 
 export default function ConnectScreen() {
   const handleRequest = async () => {

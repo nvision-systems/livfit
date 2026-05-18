@@ -1,5 +1,5 @@
 import { type NextRequest } from 'next/server';
-import { validateClinicalSession } from '@livfit/lib';
+import { validateClinicalSession } from '@livfit/lib/server';
 
 export default async function proxy(request: NextRequest) {
   const { response } = await validateClinicalSession(request, [

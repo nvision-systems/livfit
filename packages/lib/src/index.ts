@@ -9,15 +9,6 @@ export * from './repositories/blog.repository';
 export * from './repositories/notification.repository';
 export * from './repositories/user.repository';
 
-// Controllers
-export * from './controllers/workout.controller';
-export * from './controllers/diet.controller';
-export * from './controllers/blog.controller';
-
-// Auth
-export * from './auth/server';
-export * from './proxy/auth_logic';
-
 // Infrastructure
 export * from './supabase/client';
 

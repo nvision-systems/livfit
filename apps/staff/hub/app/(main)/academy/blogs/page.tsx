@@ -7,6 +7,7 @@ import {
   Share2, ArrowUpRight, TrendingUp,
   FileText, Globe, Info
 } from "lucide-react";
+import Link from "next/link";
 
 const blogPosts = [
   { id: 1, title: "Managing Sodium Intake with NAFLD", author: "Jane Miller", status: "Published", views: "1.2k", date: "Oct 25, 2023", category: "Nutrition" },
@@ -32,9 +33,11 @@ export default function BlogManagementPage() {
           <Button variant="outline" className="rounded-xl border-slate-200 font-bold gap-2">
             <Globe className="h-4 w-4" /> Preview Live
           </Button>
-          <Button className="rounded-xl bg-purple-600 hover:bg-purple-700 font-bold gap-2 px-6">
-            <Plus className="h-4 w-4" /> Create Literacy Module
-          </Button>
+          <Link href="/academy/blogs/new">
+            <Button className="rounded-xl bg-purple-600 hover:bg-purple-700 font-bold gap-2 px-6">
+              <Plus className="h-4 w-4" /> Create Literacy Module
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -91,7 +94,9 @@ export default function BlogManagementPage() {
                 
                 <div className="flex-1 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
                   <div>
-                    <h3 className="text-lg font-black text-slate-900 group-hover:text-purple-600 transition-colors">{post.title}</h3>
+                    <Link href={`/academy/blogs/${post.id}`}>
+                      <h3 className="text-lg font-black text-slate-900 group-hover:text-purple-600 transition-colors">{post.title}</h3>
+                    </Link>
                     <div className="flex items-center gap-4 mt-2 text-xs font-medium text-slate-400">
                       <span className="flex items-center gap-1.5"><PencilLine className="h-3 w-3" /> {post.author}</span>
                       <span className="flex items-center gap-1.5"><Eye className="h-3 w-3" /> {post.views} Views</span>
@@ -107,9 +112,11 @@ export default function BlogManagementPage() {
                       {post.status}
                     </Badge>
                     <div className="flex gap-1">
-                      <Button variant="ghost" size="icon" className="rounded-xl hover:bg-slate-100 h-10 w-10">
-                        <ArrowUpRight className="h-4 w-4" />
-                      </Button>
+                      <Link href={`/academy/blogs/${post.id}`}>
+                        <Button variant="ghost" size="icon" className="rounded-xl hover:bg-slate-100 h-10 w-10">
+                          <PencilLine className="h-4 w-4" />
+                        </Button>
+                      </Link>
                       <Button variant="ghost" size="icon" className="rounded-xl hover:bg-slate-100 h-10 w-10">
                         <Share2 className="h-4 w-4" />
                       </Button>

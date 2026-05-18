@@ -175,7 +175,7 @@ export default function HomeScreen() {
         
         <TouchableOpacity 
           style={styles.nutritionCard}
-          onPress={() => router.push('/nutrition-journal')}
+          onPress={() => router.push('/(tabs)/nutrition')}
         >
           <View style={styles.nutriMain}>
             <View>
@@ -235,7 +235,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity 
           style={styles.infoBanner}
-          onPress={() => router.push('/nutrition-journal')}
+          onPress={() => router.push('/learning' as any)}
         >
           <View style={styles.infoIcon}>
             <Star color="#FFFFFF" size={16} />

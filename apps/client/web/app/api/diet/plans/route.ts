@@ -1,4 +1,4 @@
-import { dietController } from '@livfit/lib';
+import { dietController } from '@livfit/lib/server';
 
 export async function GET(request: Request) {
   return dietController.getPlans(request);

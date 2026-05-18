@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
-import { searchFood, logMeal } from '../../lib/api';
+import { searchFood, logMeal } from '@livfit/lib';
 import { router } from 'expo-router';
-import { commonStyles as styles } from '../../styles';
+import { commonStyles as styles } from '../../../styles';
 
 export default function LogMealScreen() {
   const [query, setQuery] = useState('');

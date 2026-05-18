@@ -37,7 +37,7 @@ export default function EducatorDashboard() {
           </div>
           
           <div className="flex flex-col gap-3">
-            <Link href="/content/blogs/new">
+            <Link href="/academy/blogs/new">
               <Button className="w-full h-12 px-8 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black gap-2 transition-all hover:scale-105 shadow-lg shadow-purple-600/20">
                 <Plus className="h-4 w-4" /> Create New Content
               </Button>
@@ -131,9 +131,11 @@ export default function EducatorDashboard() {
                         </Badge>
                       </td>
                       <td className="px-8 py-6 text-right">
-                        <Button variant="ghost" size="sm" className="h-10 w-10 rounded-xl hover:bg-purple-600 hover:text-white transition-all text-purple-600">
-                          <PencilLine className="h-4 w-4" />
-                        </Button>
+                        <Link href={`/academy/blogs/${post.id}`}>
+                          <Button variant="ghost" size="sm" className="h-10 w-10 rounded-xl hover:bg-purple-600 hover:text-white transition-all text-purple-600">
+                            <PencilLine className="h-4 w-4" />
+                          </Button>
+                        </Link>
                       </td>
                     </tr>
                   ))}
